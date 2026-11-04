@@ -2,10 +2,13 @@ package com.example.tallerconnect.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val BrandBlue = Color(0xFF0451C7)
+val BrandTextBlue = Color(0xFF0A66F0)
+val BrandDark = Color(0xFF393F4B)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val Primary = Color(0xFF2563EB)
+val ScreenBackground = Color(0xFFF1F5FD)
+val TextDark = Color(0xFF1F2937)
+val TextMuted = Color(0xFF6B7280)
+val BorderGray = Color(0xFFD1D5DB)
+val ChipGray = Color(0xFFE5E7EB)
