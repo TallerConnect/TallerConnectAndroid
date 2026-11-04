@@ -7,10 +7,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -23,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tallerconnect.ui.theme.BrandDark
 import com.example.tallerconnect.ui.theme.BrandTextBlue
+import com.example.tallerconnect.ui.theme.TextDark
 import com.example.tallerconnect.ui.theme.TextMuted
 
 /** "Taller" en gris oscuro y "Connect" en azul, como el logotipo. */
@@ -85,4 +95,33 @@ fun PrimaryButton(
     ) {
         Text(text, fontWeight = FontWeight.SemiBold)
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TallerTopBar(
+    title: String,
+    modifier: Modifier = Modifier,
+    showBack: Boolean = false,
+    onBackClick: () -> Unit = {},
+    actionText: String? = null,
+    onActionClick: () -> Unit = {}
+) {
+    TopAppBar(
+        title = { Text(title, fontWeight = FontWeight.SemiBold, color = TextDark) },
+        modifier = modifier,
+        navigationIcon = {
+            if (showBack) {
+                IconButton(onClick = onBackClick) {
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Volver")
+                }
+            }
+        },
+        actions = {
+            if (actionText != null) {
+                TextButton(onClick = onActionClick) { Text(actionText) }
+            }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
+    )
 }

@@ -1,4 +1,4 @@
-package com.example.tallerconnect
+package com.example.tallerconnect.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
