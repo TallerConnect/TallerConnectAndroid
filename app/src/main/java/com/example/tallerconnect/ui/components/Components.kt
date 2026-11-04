@@ -22,6 +22,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -195,5 +196,25 @@ fun TallerBottomBar(
                 label = { Text(tab.label) }
             )
         }
+    }
+}
+
+@Composable
+fun SecondaryButton(
+    text: String,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
+    enabled: Boolean = true
+) {
+    OutlinedButton(
+        onClick = onClick,
+        enabled = enabled,
+        shape = RoundedCornerShape(8.dp),
+        border = BorderStroke(1.dp, Primary),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(48.dp)
+    ) {
+        Text(text, fontWeight = FontWeight.SemiBold)
     }
 }
