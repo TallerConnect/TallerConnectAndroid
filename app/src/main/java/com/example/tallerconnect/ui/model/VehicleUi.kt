@@ -6,3 +6,9 @@ data class VehicleUi(
     val estado: String,
     val enReparacion: Boolean
 )
+
+data class HistoryItemUi(
+    val titulo: String,
+    val fecha: String,
+    val detalle: String
+)
