@@ -1,6 +1,8 @@
 package com.example.tallerconnect.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -11,8 +13,17 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -20,6 +31,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -30,8 +42,11 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.tallerconnect.ui.theme.BorderGray
 import com.example.tallerconnect.ui.theme.BrandDark
 import com.example.tallerconnect.ui.theme.BrandTextBlue
+import com.example.tallerconnect.ui.theme.ChipGray
+import com.example.tallerconnect.ui.theme.Primary
 import com.example.tallerconnect.ui.theme.TextDark
 import com.example.tallerconnect.ui.theme.TextMuted
 
@@ -124,4 +139,61 @@ fun TallerTopBar(
         },
         colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
     )
+}
+
+/** Pestañas del menú de navegación inferior. */
+enum class BottomTab(val label: String, val icon: ImageVector) {
+    Vehiculos("Vehículos", Icons.Filled.Home),
+    Reparacion("Reparación", Icons.Filled.Build),
+    Historial("Historial", Icons.AutoMirrored.Filled.List),
+    Cuenta("Cuenta", Icons.Filled.Person)
+}
+
+@Composable
+fun ScreenCard(
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        border = BorderStroke(1.dp, BorderGray)
+    ) {
+        Column(modifier = Modifier.padding(16.dp), content = content)
+    }
+}
+
+@Composable
+fun StatusChip(text: String, active: Boolean, modifier: Modifier = Modifier) {
+    Surface(
+        shape = RoundedCornerShape(50),
+        color = if (active) Primary else ChipGray,
+        modifier = modifier
+    ) {
+        Text(
+            text = text,
+            color = if (active) Color.White else TextMuted,
+            fontSize = 12.sp,
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp)
+        )
+    }
+}
+
+@Composable
+fun TallerBottomBar(
+    selected: BottomTab,
+    modifier: Modifier = Modifier,
+    onTabSelected: (BottomTab) -> Unit = {}
+) {
+    NavigationBar(modifier = modifier, containerColor = Color.White) {
+        BottomTab.values().forEach { tab ->
+            NavigationBarItem(
+                selected = tab == selected,
+                onClick = { onTabSelected(tab) },
+                icon = { Icon(tab.icon, contentDescription = tab.label) },
+                label = { Text(tab.label) }
+            )
+        }
+    }
 }
