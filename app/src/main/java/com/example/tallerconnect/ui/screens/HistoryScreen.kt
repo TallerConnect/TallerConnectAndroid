@@ -1,4 +1,4 @@
-package com.tallerconnect.app.ui.screens
+package com.example.tallerconnect.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
